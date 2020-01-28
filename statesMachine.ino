@@ -59,7 +59,7 @@ void setup() {
 }
 void loop() {
 
-  loopMachineState(); // States Machine Loop 
+  loopMachineState(); // States Machine Loop Function
 
   //Read digital inputs 
   right = digitalRead(rightPin);
