@@ -21,7 +21,7 @@
   left pushbutton to PIN 2
 
   RGB led to (9,11,10) PINS  // Red = 9 , Green = 11,  Blue = 10 //
-  Each Color pin of the RGB its connected trought a 220 Ohm resistor.
+  Each Color pin of the RGB led its connected trought a 220 Ohm resistor.
 
   Created 28 January 2020
   By A.Roca
