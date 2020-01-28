@@ -16,10 +16,10 @@
 
   The circuit:
 
-  right pushbutton to PIN 3
-  left pushbutton to PIN 2
+    - Right pushbutton --> PIN 3
+    - Left pushbutton --> PIN 2
 
-  RGB led to (9,11,10) PINS  // Red = 9 , Green = 11,  Blue = 10 //
+    - RGB led to (9,11,10) PINS  // Red = 9 , Green = 11,  Blue = 10 //
 
   Created 28 January 2020
   By A.Roca
