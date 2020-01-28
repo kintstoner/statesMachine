@@ -11,7 +11,6 @@
   Materials:
   
     - 2 push buttons.
-    - 2 resistors (1 kOhm).
     - 3 resistors (220 Ohm).
     - RGB Led.
     
@@ -22,6 +21,7 @@
   left pushbutton to PIN 2
 
   RGB led to (9,11,10) PINS  // Red = 9 , Green = 11,  Blue = 10 //
+  Each Color pin of the RGB its connected trought a 220 Ohm resistor.
 
   Created 28 January 2020
   By A.Roca
@@ -31,28 +31,24 @@
 */
 
 //PinOut Variables
+//RGB LED
+const byte red_light_pin= 9;  
+const byte green_light_pin = 11;
+const byte blue_light_pin = 10;
+//Push Buttons
+const byte rightPin = 3;
+const byte leftPin = 2;
 
-int red_light_pin= 9;  
-int green_light_pin = 11;
-int blue_light_pin = 10;
-int rightPin = 3;
-int leftPin = 2;
-
-
+//Changing Variables
 int right = 0; // Variables for storing buttons digital input.
 int left = 0;
-int machineState = 0;  // Variable for store the machine-state.
+int machineState = 1;  // Variable for store the machine-state.
 
 void setup() {
 
-  // declare INPUT buttons
-  pinMode(rightPin, INPUT);
-  pinMode(leftPin, INPUT);
-  
-  // declare RGB Led OUTPUT
-  pinMode(red_light_pin, OUTPUT);
-  pinMode(green_light_pin, OUTPUT);
-  pinMode(blue_light_pin, OUTPUT);
+  // declare INPUT buttons 
+  pinMode(rightPin, INPUT_PULLUP);
+  pinMode(leftPin, INPUT_PULLUP);
   
   machineState = 1; //initializes machine state to 1
   
@@ -66,15 +62,16 @@ void loop() {
   left = digitalRead(leftPin);
 
   //Check if buttons are pressed - delay added to prevent bouncing.
+  // Since we are using INPUT_PULLUP the button its pressed on LOW state.
   
-  if(right == HIGH){ //if right button pressed. 
+  if(right == LOW){ //if right button pressed. 
     
     machineState++; //increase machine state by one.
     delay(100); 
     
   
   }
-  if(left == HIGH){ //if left button pressed.
+  if(left == LOW){ //if left button pressed.
     
     machineState--; //decrease machine state by one.
     delay(100);
@@ -84,9 +81,11 @@ void loop() {
 }
 
 void loopMachineState(){
+  
   // Loops a State depending on machineState variable, initial state is "1".
   // You can make it non-rotable by putting machineState = 1 in case 0 and machineState = 4 in case 5.
   // You can also add as many states as u want !!
+  
   switch(machineState){
     
     case 0:
@@ -117,6 +116,8 @@ void loopMachineState(){
   }
 
 }
+
+// This is a function writes the output of the RGB led.
 
 void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
  {
