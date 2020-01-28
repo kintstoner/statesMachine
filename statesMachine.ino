@@ -26,65 +26,72 @@
   Created 28 January 2020
   By A.Roca
   
-  http://url/of/online/tutorial.cc
+  https://github.com/kintstoner/statesMachine
 
 */
 
-int red_light_pin= 9;
+//PinOut Variables
+
+int red_light_pin= 9;  
 int green_light_pin = 11;
 int blue_light_pin = 10;
-
 int rightPin = 3;
 int leftPin = 2;
-int right = 0;
-int left = 0;
 
-int machineState = 0;
+
+int right = 0; // Variables for storing buttons digital input.
+int left = 0;
+int machineState = 0;  // Variable for store the machine-state.
 
 void setup() {
-  
+
+  // declare INPUT buttons
   pinMode(rightPin, INPUT);
   pinMode(leftPin, INPUT);
   
+  // declare RGB Led OUTPUT
   pinMode(red_light_pin, OUTPUT);
   pinMode(green_light_pin, OUTPUT);
   pinMode(blue_light_pin, OUTPUT);
   
-  machineState = 1;
+  machineState = 1; //initializes machine state to 1
   
 }
 void loop() {
-  
+
+  loopMachineState(); // States Machine Loop 
+
+  //Read digital inputs 
   right = digitalRead(rightPin);
   left = digitalRead(leftPin);
+
+  //Check if buttons are pressed - delay added to prevent bouncing.
   
-  loopMachineState();
-  
-  if(right == HIGH){
+  if(right == HIGH){ //if right button pressed. 
     
-    machineState++;
-    
-    delay(200);
+    machineState++; //increase machine state by one.
+    delay(100); 
     
   
   }
-  if(left == HIGH){
+  if(left == HIGH){ //if left button pressed.
     
-    machineState--;
-    
-    delay(200);
+    machineState--; //decrease machine state by one.
+    delay(100);
   
   }
   
 }
 
 void loopMachineState(){
-  
+  // Loops a State depending on machineState variable, initial state is "1".
+  // You can make it non-rotable by putting machineState = 1 in case 0 and machineState = 4 in case 5.
+  // You can also add as many states as u want !!
   switch(machineState){
     
     case 0:
       machineState = 4;
-      
+      // to make it rotable  when you go less than 1 jumps into the last state 4.
       break;
     case 1:
       RGB_color(255, 0, 0); // Red
@@ -104,12 +111,13 @@ void loopMachineState(){
       break;
     case 5:
       machineState = 1;
-      
+      // to make it rotable  when you go further than 4 jumps into the first state 1.
       break;
   
   }
 
 }
+
 void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
  {
   analogWrite(red_light_pin, red_light_value);
